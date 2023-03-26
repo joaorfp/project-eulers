@@ -1,6 +1,7 @@
 def prime(num):
     if num > 1:
         for index in range(2, int(num ** 0.5) + 1):
+            print(num, index)
             if (num % index) == 0:
                 return False
         return True

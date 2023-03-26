@@ -1,13 +1,15 @@
+import collections
+
 def card_value(card):
     values = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
     return values[card[0]]
 
-import collections
 
 def rank_hand(hand):
     values = [card_value(card) for card in hand]
     suits = [card[1] for card in hand]
 
+    # count suits and card values to match a pattern
     value_counts = collections.Counter(values)
     suit_counts = collections.Counter(suits)
 
@@ -16,6 +18,7 @@ def rank_hand(hand):
     else:
         flush = False
 
+    # sets the value of the hand
     sorted_values = sorted(values)
     straight = (sorted_values[-1] - sorted_values[0] == 4) and (len(set(sorted_values)) == 5)
 
@@ -44,12 +47,13 @@ def compare_hands(hand1, hand2):
     rank2 = rank_hand(hand2)
     print(hand1, hand2)
 
+    # compare the hands
     if rank1 > rank2:
-        print('aaaaaaa')
         return True
     elif rank2 > rank1:
         return False
     else:
+        # logic for tie and card values to get the value more deeply
         for card1, card2 in zip(sorted(hand1, reverse=True), sorted(hand2, reverse=True)):
             if card_value(card1) > card_value(card2):
                 return True
@@ -57,15 +61,18 @@ def compare_hands(hand1, hand2):
                 return False
         return 'Tie'
 
-    
+
 if __name__ == '__main__':
     with open('poker.txt') as f:
+        #read the file
         hands = f.read().strip().split('\n')
         count = 0
         for hand in hands:
+            # splits the hands and limit 5 hands for each round
             cards = hand.split()
             hand1 = cards[:5]
             hand2 = cards[5:]
+            # compare hands
             if compare_hands(hand1, hand2) == True:
                 count += 1
 

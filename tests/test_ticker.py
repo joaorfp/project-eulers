@@ -1,6 +1,5 @@
 from datetime import datetime, date
 from project.ticker import Ticker
-import pandas as pd
 import unittest
 import pandas_market_calendars as mcal
 import pandas as pd
