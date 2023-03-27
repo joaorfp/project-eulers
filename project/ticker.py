@@ -91,5 +91,9 @@ class Ticker:
             print(f'Ticket will expire at {next_ticket_to_expire}. Util-Days to ticket expiration: {len(datas)}')
             return f'Ticket will expire at {next_ticket_to_expire}. Util-Days to ticket expiration: {len(datas)}'
 
-ticker = Ticker('2023-04-03')
+ticker = Ticker('2023-03-27')
 ticker.next_ticket_expiration()
+
+# ticker = Ticker()
+# ticker.next_ticket_expiration(1)
+

@@ -16,6 +16,6 @@ while True:
     num += 1
     if prime(num):
         count += 1
-        if count == 10:
+        if count == 10001:
             print(num)
             break
