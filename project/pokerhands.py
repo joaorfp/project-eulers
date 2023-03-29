@@ -64,7 +64,6 @@ def rank_hand(hand):
     # if the card has a high value, its rank 1
     else:
         rank = 1
-    print(value_counts.most_common(1)[0][1])
     return rank
 
 # This function takes two hands as input and returns True or False. It determines each hand's value and compare them.

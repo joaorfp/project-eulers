@@ -16,48 +16,24 @@ class Ticker:
         day_15 = data + relativedelta(day=15)
 
         # checks if the month is odd, so it will add 1+ in a month (or not)
-        if int(data.month) % 2 == 0: 
-            # gets the weekday of the date (it goes 1 to 5)
-            weekday = day_15.weekday()
-            print(weekday)
-
-            # gets the difference between the day 15 of the month and the previous and next wednesday
-            previous_wednesday = weekday - 2 if weekday >= 2 else weekday + 4
-            print(previous_wednesday)
-            next_wednesday = 2 - weekday if weekday <= 2 else 9 - weekday
-            print(next_wednesday)
-            # checks the difference
-            if previous_wednesday <= next_wednesday:
-                # get the day15 and subtract by how much days of difference it has from closest wednesday
-                nearest_wednesday = day_15 - timedelta(days=previous_wednesday)
-                print(nearest_wednesday, 'date')
-            else:
-                # get the day15 and sum by how much days of difference it has from closest wednesday
-                nearest_wednesday = day_15 + timedelta(days=next_wednesday)
-                print(nearest_wednesday, 'date2')
-
-            return nearest_wednesday
-        else:
-            # sum 1 month, since it is odd(ticker expires in even months)
+        if int(data.month) % 2 != 0: 
             data += relativedelta(month=int(data.month) + 1)
-            # gets the day 15 of the month
-            day_15 = data + relativedelta(day=15)
-            weekday = day_15.weekday()
-            print(weekday)
+        # gets the day 15 of the month
+        day_15 = data + relativedelta(day=15)
+        weekday = day_15.weekday()
+        print(weekday)
 
-            previous_wednesday = weekday - 2 if weekday >= 2 else weekday + 4
-            print(previous_wednesday)
-            next_wednesday = 2 - weekday if weekday <= 2 else 9 - weekday
-            print(next_wednesday)
+        # gets the diff between the weekday given and wednesday
+        previous_wednesday = weekday - 2 if weekday >= 2 else weekday + 4
+        next_wednesday = 2 - weekday if weekday <= 2 else 9 - weekday
 
-            if previous_wednesday <= next_wednesday:
-                nearest_wednesday = day_15 - timedelta(days=previous_wednesday)
-                print(nearest_wednesday, 'date')
-            else:
-                nearest_wednesday = day_15 + timedelta(days=next_wednesday)
-                print(nearest_wednesday, 'date2')
+        # checks the diff to determine if the days will be subtracted or added
+        if previous_wednesday <= next_wednesday:
+            nearest_wednesday = day_15 - timedelta(days=previous_wednesday)
+        else:
+            nearest_wednesday = day_15 + timedelta(days=next_wednesday)
 
-            return nearest_wednesday
+        return nearest_wednesday
 
 
     def nth_ticket_expiration(self, ticker):
